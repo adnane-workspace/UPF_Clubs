@@ -1,69 +1,143 @@
+import { memo, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { IconArrowRight, IconCpu, IconTrophy, IconPalmtree, IconPalette, IconBriefcase, IconUsers } from '../ui/Icons';
 
 const categoryConfig = {
-  Tech:          { bg: 'bg-blue-50  text-blue-700  border-blue-200',   dot: 'bg-blue-500'    },
-  Sport:         { bg: 'bg-orange-50 text-orange-700 border-orange-200', dot: 'bg-orange-500'  },
-  Culture:       { bg: 'bg-purple-50 text-purple-700 border-purple-200', dot: 'bg-purple-500'  },
-  Environnement: { bg: 'bg-brand-50 text-brand-700 border-brand-200', dot: 'bg-brand-500' },
-  Gaming:        { bg: 'bg-red-50   text-red-700   border-red-200',    dot: 'bg-red-500'     },
-  Communication: { bg: 'bg-amber-50  text-amber-700  border-amber-200', dot: 'bg-amber-500'   },
+  Tech:     { icon: IconCpu,  colors: 'bg-violet-500/20 text-violet-300 border-violet-500/30' },
+  Sport:    { icon: IconTrophy, colors: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30' },
+  Culture:  { icon: IconPalmtree, colors: 'bg-pink-500/20 text-pink-300 border-pink-500/30' },
+  Art:      { icon: IconPalette,  colors: 'bg-amber-500/20 text-amber-300 border-amber-500/30' },
+  Business: { icon: IconBriefcase, colors: 'bg-green-500/20 text-green-300 border-green-500/30' },
 };
 
-export default function ClubCard({ club }) {
-  const cfg = categoryConfig[club.category] || { bg: 'bg-slate-100 text-slate-700 border-slate-200', dot: 'bg-slate-400' };
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.5, ease: [0.21, 0.47, 0.32, 0.98] }
+  }
+};
+
+const ClubCard = memo(({ club, onClick }) => {
+  const config = categoryConfig[club.category] || categoryConfig.Tech;
+  const Icon = config.icon;
+
+  const cardRef = useRef(null);
+  const [rotateX, setRotateX] = useState(0);
+  const [rotateY, setRotateY] = useState(0);
+  const [glareX, setGlareX] = useState(50);
+  const [glareY, setGlareY] = useState(50);
+
+  const handleMouseMove = (e) => {
+    if (typeof window !== 'undefined' && window.matchMedia('(hover: none)').matches) return;
+    const card = cardRef.current;
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    const mouseX = e.clientX - centerX;
+    const mouseY = e.clientY - centerY;
+    setRotateX(-mouseY / (rect.height / 2) * 8);
+    setRotateY(mouseX / (rect.width / 2) * 8);
+    setGlareX(((e.clientX - rect.left) / rect.width) * 100);
+    setGlareY(((e.clientY - rect.top) / rect.height) * 100);
+  };
+
+  const handleMouseLeave = () => {
+    setRotateX(0);
+    setRotateY(0);
+  };
 
   return (
     <motion.div
-      whileHover={{ y: -8, boxShadow: '0 24px 48px -12px rgba(15,23,42,0.15)' }}
-      transition={{ duration: 0.3, ease: 'easeOut' }}
-      className="group bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm flex flex-col h-full"
+      ref={cardRef}
+      onClick={onClick}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 40 }}
+      whileTap={{ scale: 0.97 }}
+      viewport={{ once: true, amount: 0.2 }}
+      className="group flex flex-col h-full p-4 sm:p-5 lg:p-6 rounded-2xl cursor-pointer"
+      style={{
+        transform: `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
+        transition: 'transform 0.1s ease',
+        willChange: 'transform',
+        position: 'relative', overflow: 'hidden',
+        background: 'rgba(255,255,255,0.03)',
+        backdropFilter: 'blur(10px)',
+        border: '0.5px solid rgba(255,255,255,0.08)'
+      }}
     >
-      {/* Image */}
-      <div className="relative h-52 overflow-hidden">
-        <img
-          src={club.image}
-          alt={club.name}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108"
-          style={{ transform: 'scale(1)' }}
-          onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.08)'}
-          onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
-
-        {/* Category badge */}
-        <div className="absolute top-4 left-4">
-          <span className={`flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-full border ${cfg.bg}`}>
-            <span className={`w-1.5 h-1.5 rounded-full ${cfg.dot}`} />
-            {club.category}
-          </span>
-        </div>
+      {/* Glare effect */}
+      <div style={{
+        position: 'absolute', inset: 0, borderRadius: '16px',
+        background: `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.06) 0%, transparent 60%)`,
+        pointerEvents: 'none', transition: 'background 0.1s ease'
+      }} />
+      
+      {/* Top gradient accent */}
+      <div style={{
+        position: 'absolute', top: 0, left: 0, right: 0,
+        height: '1px',
+        background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent)'
+      }} />
+      {/* Top Section: Icon & Badge */}
+      <div className="flex items-center justify-between mb-3 sm:mb-4">
+        <motion.div 
+          whileHover={{ rotate: [0, -10, 10, 0] }}
+          transition={{ duration: 0.4, repeat: 1 }}
+          className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl text-xl sm:text-2xl border flex items-center justify-center ${config.colors}`}
+        >
+          <Icon size={22} />
+        </motion.div>
+        <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border ${config.colors}`}>
+          {club.category}
+        </span>
       </div>
 
-      {/* Body */}
-      <div className="p-6 flex flex-col flex-grow">
-        <h3 className="text-lg font-bold text-navy-900 mb-2 group-hover:text-brand-600 transition-colors leading-snug">
+      {/* Middle: Info */}
+      <div className="flex-grow">
+        <h3 className="text-base sm:text-lg lg:text-xl font-semibold mb-1 sm:mb-2 text-white group-hover:text-violet-300 transition-colors">
           {club.name}
         </h3>
-        <p className="text-slate-500 text-sm leading-relaxed mb-6 flex-grow">
+        <p className="text-xs sm:text-sm text-white/50 leading-relaxed line-clamp-3">
           {club.description}
         </p>
+      </div>
 
-        {/* Footer row */}
-        <div className="flex items-center justify-between pt-4 border-t border-slate-100">
-          <span className="text-xs text-slate-400 font-medium flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-brand-400 animate-pulse" />
-            {club.events.length} événement{club.events.length > 1 ? 's' : ''}
-          </span>
-          <motion.button
-            whileHover={{ scale: 1.12 }}
-            whileTap={{ scale: 0.92 }}
-            className="w-9 h-9 bg-navy-900 group-hover:bg-brand-500 text-white rounded-full flex items-center justify-center transition-colors shadow-sm"
-          >
-            <ArrowRight size={16} />
-          </motion.button>
+      {/* Bottom: Avatars & Join */}
+      <div className="mt-10 pt-6 border-t border-white/5 flex items-center justify-between">
+        <div className="flex -space-x-2">
+          {[1, 2, 3].map((i) => (
+            <div 
+              key={i} 
+              className="w-8 h-8 rounded-full border-2 border-[#0a0a0f] bg-slate-800 flex items-center justify-center text-[10px] font-bold text-white overflow-hidden"
+            >
+              <img 
+                src={`https://api.dicebear.com/7.x/avataaars/svg?seed=club-${i}${club.id}`} 
+                alt="avatar" 
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+          ))}
+          <div className="w-8 h-8 rounded-full border-2 border-[#0a0a0f] bg-[#1f1f2e] flex items-center justify-center text-[10px] font-bold text-white/60">
+            +12
+          </div>
         </div>
+
+        <button className="flex items-center gap-2 text-sm font-bold text-white/50 group-hover:text-white transition-all">
+          <span className="hidden sm:inline">Rejoindre</span>
+          <IconArrowRight 
+            size={18} 
+            className="transition-transform duration-300 group-hover:translate-x-1" 
+          />
+        </button>
       </div>
     </motion.div>
   );
-}
+});
+
+export default ClubCard;
