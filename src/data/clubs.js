@@ -1,13 +1,14 @@
-// Fichier central de données - Modifiez ce fichier pour mettre à jour le contenu du site
-
-export const clubsData = [
+// Data file for Clubs and Events
+export const clubs = [
   {
     id: 1,
     name: "UPF Code Club",
     category: "Tech",
     description: "Le club des passionnés de programmation, de développement web et d'intelligence artificielle.",
     image: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    events: ["Hackathon 2025", "Workshops React"]
+    members: 120,
+    icon: "💻",
+    color: "violet"
   },
   {
     id: 2,
@@ -15,7 +16,9 @@ export const clubsData = [
     category: "Sport",
     description: "Rejoignez-nous pour représenter l'université dans les compétitions sportives régionales.",
     image: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    events: ["Tournoi Foot", "Marathon"]
+    members: 85,
+    icon: "⚽",
+    color: "orange"
   },
   {
     id: 3,
@@ -23,7 +26,9 @@ export const clubsData = [
     category: "Culture",
     description: "Un espace pour exprimer votre créativité à travers la peinture, la musique et le théâtre.",
     image: "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    events: ["Exposition Art", "Soirée Théâtre"]
+    members: 50,
+    icon: "🎨",
+    color: "pink"
   },
   {
     id: 4,
@@ -31,7 +36,9 @@ export const clubsData = [
     category: "Environnement",
     description: "Sensibilisation et actions pour la protection de l'environnement au sein du campus.",
     image: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    events: ["Clean Up Day"]
+    members: 40,
+    icon: "🌿",
+    color: "green"
   },
   {
     id: 5,
@@ -39,7 +46,9 @@ export const clubsData = [
     category: "Gaming",
     description: "Des tournois compétitifs sur les jeux du moment. Forme ton équipe et gagne !",
     image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    events: ["Tournoi Valorant"]
+    members: 200,
+    icon: "🎮",
+    color: "red"
   }
 ];
 
@@ -97,7 +106,7 @@ export const upcomingEventsData = [
     dot: "bg-green-500",
   },
   {
-    id: 5,
+    id: 6,
     title: "Exposition d'Art",
     club: "Club d'Art & Culture",
     category: "Culture",
