@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 
-
+/**
+ * CustomCursor Component
+ * 
+ * Provides a dual-layer cursor with:
+ * 1. An instant dot for precise feedback
+ * 2. A springy ring that morphs based on hover targets
+ */
 export default function CustomCursor() {
   const [cursorType, setCursorType] = useState('default');
   
