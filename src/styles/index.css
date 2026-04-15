@@ -1,8 +1,35 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@600;700;800&display=swap');
+@import "tailwindcss";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@theme {
+  --color-navy-50: #eef2ff;
+  --color-navy-100: #e0e7ff;
+  --color-navy-200: #c7d2fe;
+  --color-navy-300: #a5b4fc;
+  --color-navy-400: #818cf8;
+  --color-navy-500: #2563eb;
+  --color-navy-600: #1d4ed8;
+  --color-navy-700: #1e3a8a;
+  --color-navy-800: #172255;
+  --color-navy-900: #0f172a;
+  --color-navy-950: #080d1a;
+
+  --color-brand-50: #e6f3fa;
+  --color-brand-100: #cce7f5;
+  --color-brand-200: #99cfeb;
+  --color-brand-300: #66b7e1;
+  --color-brand-400: #339fd7;
+  --color-brand-500: #0077b6;
+  --color-brand-600: #005f91;
+  --color-brand-700: #00476d;
+  --color-brand-800: #002f48;
+  --color-brand-900: #001724;
+  --color-brand-950: #000b12;
+
+  --font-sans: "Inter", "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --breakpoint-xs: 375px;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@600;700;800&display=swap');
 
 @layer base {
   html {
