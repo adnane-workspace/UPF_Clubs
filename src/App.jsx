@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from './components/layout/Navbar';
 import Hero from './components/home/Hero';
@@ -6,10 +6,9 @@ import WhyJoinSection from './components/home/WhyJoinSection';
 import ClubsSection from './components/home/ClubsSection';
 import StatsSection from './components/home/StatsSection';
 import EventsCarousel from './components/home/EventsCarousel';
+import UpcomingEventsScroll from './components/home/UpcomingEventsScroll';
 import Footer from './components/layout/Footer';
 import LoadingScreen from './components/ui/LoadingScreen';
-import { ScrollReveal } from './components/ui/ScrollReveal';
-import SectionReveal from './components/ui/SectionReveal';
 import Marquee from './components/ui/Marquee';
 import TestimonialsSection from './components/home/TestimonialsSection';
 import CTASection from './components/home/CTASection';
@@ -23,6 +22,8 @@ export default function App() {
     sessionStorage.setItem('visited', 'true');
     setLoading(false);
   };
+
+  const sectionStyle = { scrollMarginTop: '72px' };
 
   return (
     <div style={{
@@ -49,29 +50,33 @@ export default function App() {
           <Navbar />
           
           <main>
-            <section id="accueil" style={{ scrollMarginTop: '64px' }}>
+            <section id="evenements" style={sectionStyle}>
+              <EventsCarousel />
+            </section>
+
+            <section id="calendrier" style={sectionStyle}>
+              <UpcomingEventsScroll />
+            </section>
+
+            <section id="accueil" style={sectionStyle}>
               <Hero />
             </section>
 
             <Marquee />
 
-            <section id="pourquoi" style={{ scrollMarginTop: '64px' }}>
-              <WhyJoinSection />
-            </section>
-
-            <section id="stats" style={{ scrollMarginTop: '64px' }}>
-               <StatsSection />
-            </section>
-
-            <section id="clubs" style={{ scrollMarginTop: '64px' }}>
+            <section id="clubs" style={sectionStyle}>
               <ClubsSection />
             </section>
 
-            <section id="evenements" style={{ scrollMarginTop: '64px' }}>
-              <EventsCarousel />
+            <section id="stats" style={sectionStyle}>
+               <StatsSection />
             </section>
 
-            <section id="temoignages" style={{ scrollMarginTop: '64px' }}>
+            <section id="pourquoi" style={sectionStyle}>
+              <WhyJoinSection />
+            </section>
+
+            <section id="temoignages" style={sectionStyle}>
               <TestimonialsSection />
             </section>
           </main>

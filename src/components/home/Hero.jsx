@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, useReducedMotion, AnimatePresence } from 'framer-motion';
 
 const rotatingWords = ['passion', 'ambition', 'créativité', 'leadership', 'avenir'];
 
 export default function Hero() {
-  console.log('Hero rendering');
-  const shouldReduceMotion = useReducedMotion();
   const [wordIndex, setWordIndex] = useState(0);
 
   useEffect(() => {
@@ -56,7 +54,7 @@ export default function Hero() {
 
   return (
     <section style={{
-      minHeight: '100vh',
+      minHeight: '100svh',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
@@ -145,7 +143,7 @@ export default function Hero() {
               <span style={{ color: 'white' }}>Rejoins</span>
               <br />
               <span style={{ color: 'white' }}>l'espace de </span>
-              <span style={{ display: 'inline-block', position: 'relative', minWidth: '280px' }}>
+              <span style={{ display: 'inline-block', position: 'relative', minWidth: 'clamp(160px, 45vw, 280px)' }}>
                 <AnimatePresence mode="wait">
                   <motion.span
                     key={wordIndex}

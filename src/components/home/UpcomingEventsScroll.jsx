@@ -1,17 +1,18 @@
 import { useState, useRef, useEffect, memo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { IconCalendar, IconClock, IconMapPin, IconArrowRight, IconArrowUpRight, IconChevronLeft, IconChevronRight } from '../ui/Icons';
+import { motion } from 'framer-motion';
+import { IconCalendar, IconClock } from '../ui/Icons';
 import { upcomingEventsData as upcomingEvents } from '../../data/clubs';
+import EventDetailsModal from '../ui/EventDetailsModal';
 
 const pad = (n) => String(n).padStart(2, '0');
 
-const EventSlide = memo(({ ev, idx, slideRef }) => (
+const EventSlide = memo(({ ev, idx, slideRef, onShowDetails }) => (
   <div
     ref={slideRef}
     className="relative flex-shrink-0 bg-[#0a0a0f] flex flex-col lg:flex-row overflow-hidden"
-    style={{ width: '100vw', height: '100vh', scrollSnapAlign: 'start' }}
+    style={{ minWidth: '100%', height: '100%', scrollSnapAlign: 'start' }}
   >
-    <div className="relative z-10 flex flex-col justify-between w-full lg:w-[55%] h-full px-6 sm:px-10 lg:px-16 py-14">
+    <div className="relative z-20 flex flex-col justify-between w-full lg:w-[55%] h-full px-4 sm:px-8 lg:px-16 pt-10 sm:pt-14 pb-24 sm:pb-16">
       <motion.div
         initial={{ opacity: 0, x: -20 }}
         whileInView={{ opacity: 1, x: 0 }}
@@ -28,15 +29,15 @@ const EventSlide = memo(({ ev, idx, slideRef }) => (
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.6 }}
       >
-        <div className="flex items-center gap-3 mb-5">
+        <div className="flex items-center gap-3 mb-4 sm:mb-5 flex-wrap">
           <span className={`inline-block bg-gradient-to-r ${ev.color} text-white text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full`}>
             {ev.category}
           </span>
           <span className="text-white/45 text-sm">par <span className="text-white/75 font-semibold">{ev.club}</span></span>
         </div>
-        <h2 className="text-4xl sm:text-6xl font-black text-white leading-tight mb-6">{ev.title}</h2>
-        <p className="text-slate-400 text-base leading-relaxed mb-8 max-w-lg">{ev.description}</p>
-        <div className="flex flex-wrap gap-4 mb-8">
+        <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white leading-tight mb-5 sm:mb-6">{ev.title}</h2>
+        <p className="text-slate-300/90 text-sm sm:text-base leading-relaxed mb-6 sm:mb-8 max-w-lg">{ev.description}</p>
+        <div className="flex flex-wrap gap-3 sm:gap-4 mb-6 sm:mb-8">
             <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl px-4 py-2">
               <IconCalendar size={14} className="text-violet-500" />
               <span className="text-white text-sm">{ev.date}</span>
@@ -46,10 +47,16 @@ const EventSlide = memo(({ ev, idx, slideRef }) => (
               <span className="text-white text-sm">{ev.time}</span>
             </div>
         </div>
-        <button className={`bg-gradient-to-r ${ev.color} text-white font-bold px-8 py-3 rounded-xl transition-all`}>S'inscrire</button>
+        <button
+          type="button"
+          onClick={() => onShowDetails(ev)}
+          className={`bg-gradient-to-r ${ev.color} text-white font-bold px-6 sm:px-8 py-3 rounded-xl transition-all`}
+        >
+          Détails
+        </button>
       </motion.div>
 
-      <div className="text-white/20 text-xl font-black">{pad(idx + 1)} / {pad(upcomingEvents.length)}</div>
+      <div className="text-white/20 text-base sm:text-xl font-black">{pad(idx + 1)} / {pad(upcomingEvents.length)}</div>
     </div>
 
     <div className="hidden lg:block w-[45%] h-full p-6">
@@ -63,6 +70,7 @@ const EventSlide = memo(({ ev, idx, slideRef }) => (
 
 export default function UpcomingEventsScroll() {
   const [activeIdx, setActiveIdx] = useState(0);
+  const [selectedEvent, setSelectedEvent] = useState(null);
   const containerRef = useRef(null);
   const slideRefs = useRef([]);
 
@@ -86,24 +94,30 @@ export default function UpcomingEventsScroll() {
   const scrollTo = (idx) => slideRefs.current[idx]?.scrollIntoView({ behavior: 'smooth', inline: 'start' });
 
   return (
-    <section id="calendrier" className="relative bg-[#0a0a0f] h-screen overflow-hidden">
+    <section className="relative bg-[#0a0a0f] h-[100svh] overflow-hidden">
       <div
         ref={containerRef}
-        className="flex h-full overflow-x-scroll snap-x snap-mandatory hide-scrollbar"
+        className="flex h-full overflow-x-auto snap-x snap-mandatory hide-scrollbar"
         style={{ scrollbarWidth: 'none' }}
       >
         {upcomingEvents.map((ev, idx) => (
-          <EventSlide key={ev.id} ev={ev} idx={idx} slideRef={(el) => (slideRefs.current[idx] = el)} />
+          <EventSlide
+            key={ev.id}
+            ev={ev}
+            idx={idx}
+            slideRef={(el) => (slideRefs.current[idx] = el)}
+            onShowDetails={setSelectedEvent}
+          />
         ))}
       </div>
 
-      <div className="absolute bottom-8 left-0 right-0 z-50 px-6 sm:px-16 flex justify-between items-center pointer-events-none">
+      <div className="absolute bottom-4 sm:bottom-6 left-0 right-0 z-10 px-4 sm:px-12 lg:px-16 flex justify-between items-center pointer-events-none">
         <div className="flex gap-2 pointer-events-auto">
           {upcomingEvents.map((_, i) => (
             <button
               key={i}
               onClick={() => scrollTo(i)}
-              className="relative h-1 w-8 bg-white/10 rounded-full overflow-hidden"
+              className="relative h-1 w-6 sm:w-8 bg-white/10 rounded-full overflow-hidden"
             >
               <motion.div
                 className="absolute inset-0 bg-white"
@@ -115,6 +129,8 @@ export default function UpcomingEventsScroll() {
           ))}
         </div>
       </div>
+
+      <EventDetailsModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />
     </section>
   );
 }

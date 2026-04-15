@@ -2,10 +2,11 @@ import { useState, useEffect, useRef, useCallback, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { IconChevronLeft, IconChevronRight, IconArrowRight } from '../ui/Icons';
 import { upcomingEventsData as eventsData } from '../../data/clubs';
+import EventDetailsModal from '../ui/EventDetailsModal';
 
 const AUTOPLAY_DELAY = 5500;
 
-const Slide = memo(({ ev, direction, variants }) => (
+const Slide = memo(({ ev, direction, variants, onShowDetails, onNext }) => (
   <motion.div
     custom={direction}
     variants={variants}
@@ -24,20 +25,31 @@ const Slide = memo(({ ev, direction, variants }) => (
     />
     <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/60 to-transparent" />
     
-    <div className="relative z-10 h-full flex flex-col justify-end pb-24 px-6 sm:px-10 lg:px-16 max-w-7xl mx-auto w-full">
+    <div className="relative z-30 h-full flex flex-col justify-end pb-32 sm:pb-28 lg:pb-24 px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto w-full">
       <div className="max-w-2xl">
-        <span className="inline-block bg-violet-600 text-white text-[10px] font-black uppercase tracking-[0.2em] px-4 py-1.5 rounded-full mb-6">
+        <span className="inline-block bg-violet-600 text-white text-[10px] font-black uppercase tracking-[0.2em] px-3 py-1.5 rounded-full mb-4 sm:mb-6">
           {ev.category}
         </span>
-        <h1 className="text-4xl sm:text-6xl font-black text-white leading-tight mb-4">
+        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white leading-tight mb-3 sm:mb-4">
           {ev.title}
         </h1>
-        <p className="text-slate-400 text-lg mb-8 max-w-xl">
+        <p className="text-slate-300/90 text-sm sm:text-base lg:text-lg mb-6 sm:mb-8 max-w-xl">
           {ev.description}
         </p>
-        <div className="flex flex-wrap gap-4">
-          <button className="bg-violet-600 hover:bg-violet-500 text-white font-bold px-8 py-3 rounded-xl transition-all flex items-center gap-2">
-            S'inscrire <IconArrowRight size={16} />
+        <div className="flex flex-wrap gap-3 sm:gap-4">
+          <button
+            type="button"
+            onClick={() => onShowDetails(ev)}
+            className="bg-violet-600 hover:bg-violet-500 text-white font-bold px-6 sm:px-8 py-3 rounded-xl transition-all flex items-center gap-2"
+          >
+            Détails <IconArrowRight size={16} />
+          </button>
+          <button
+            type="button"
+            onClick={onNext}
+            className="bg-white/10 hover:bg-white/20 border border-white/15 text-white font-bold px-5 sm:px-6 py-3 rounded-xl transition-all flex items-center gap-2 min-h-[44px]"
+          >
+            Événement suivant <IconChevronRight size={16} />
           </button>
         </div>
       </div>
@@ -49,6 +61,7 @@ export default function EventsCarousel() {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(1);
   const [progress, setProgress] = useState(0);
+  const [selectedEvent, setSelectedEvent] = useState(null);
   const timerRef = useRef(null);
 
   const goTo = useCallback((idx, dir = 1) => {
@@ -75,25 +88,32 @@ export default function EventsCarousel() {
 
   return (
     <section 
-      className="relative w-full h-[80vh] overflow-hidden bg-[#0a0a0f]"
+      className="relative w-full min-h-[92svh] sm:min-h-[86vh] lg:h-[80vh] overflow-hidden bg-[#0a0a0f]"
       style={{
-        paddingTop: 'clamp(60px, 10vh, 120px)',
-        paddingBottom: 'clamp(60px, 10vh, 120px)',
-        paddingLeft: 'clamp(16px, 4vw, 80px)',
-        paddingRight: 'clamp(16px, 4vw, 80px)'
+        paddingTop: 'clamp(72px, 9vh, 120px)',
+        paddingBottom: 'clamp(44px, 8vh, 100px)',
+        paddingLeft: 'clamp(12px, 3vw, 80px)',
+        paddingRight: 'clamp(12px, 3vw, 80px)'
       }}
     >
       <AnimatePresence custom={direction} mode="wait">
-        <Slide key={current} ev={eventsData[current]} direction={direction} variants={variants} />
+        <Slide
+          key={current}
+          ev={eventsData[current]}
+          direction={direction}
+          variants={variants}
+          onShowDetails={setSelectedEvent}
+          onNext={next}
+        />
       </AnimatePresence>
 
-      <div className="absolute bottom-10 left-0 right-0 z-20 px-6 sm:px-10 lg:px-16 max-w-7xl mx-auto flex items-center justify-between pointer-events-none">
+      <div className="absolute bottom-4 sm:bottom-8 left-0 right-0 z-10 px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-0 justify-between pointer-events-none">
         <div className="flex gap-3 pointer-events-auto">
           {eventsData.map((_, i) => (
             <button
               key={i}
               onClick={() => goTo(i, i > current ? 1 : -1)}
-              className="relative h-1 w-10 bg-white/10 overflow-hidden rounded-full"
+              className="relative h-1 w-7 sm:w-10 bg-white/10 overflow-hidden rounded-full"
             >
               <motion.div 
                 className="absolute inset-y-0 left-0 bg-violet-500"
@@ -104,14 +124,16 @@ export default function EventsCarousel() {
         </div>
         
         <div className="flex gap-2 pointer-events-auto">
-          <button onClick={prev} className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-white/5">
-            <IconChevronLeft size={20} />
+          <button onClick={prev} className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-white/5">
+            <IconChevronLeft size={18} />
           </button>
-          <button onClick={next} className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-white/5">
-            <IconChevronRight size={20} />
+          <button onClick={next} className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-white/5">
+            <IconChevronRight size={18} />
           </button>
         </div>
       </div>
+
+      <EventDetailsModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />
     </section>
   );
 }

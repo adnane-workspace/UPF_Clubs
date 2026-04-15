@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { IconPlus } from '../ui/Icons';
 import ClubCard from '../ui/ClubCard';
@@ -27,11 +27,6 @@ export default function ClubsSection() {
     ? clubs 
     : clubs.filter(club => club.category === activeFilter);
 
-  // Debugging log
-  useEffect(() => {
-    console.log(`Active Filter: ${activeFilter}`, filteredClubs);
-  }, [activeFilter, filteredClubs]);
-
   return (
     <section 
       className="relative bg-[#08080f]"
@@ -42,10 +37,10 @@ export default function ClubsSection() {
         paddingRight: 'clamp(16px, 4vw, 80px)'
       }}
     >
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+      <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
 
         {/* Header row */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+        <div className="flex flex-col gap-6 sm:gap-8 mb-10 sm:mb-16">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -56,32 +51,22 @@ export default function ClubsSection() {
               <span className="w-10 h-[1.5px] bg-violet-500 rounded-full" /> 
               Communauté
             </span>
-            <h2 className="text-4xl sm:text-6xl font-black text-white leading-tight">
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white leading-tight">
               Rejoins ton <br />
               <span className="gradient-text">Espace de Passion</span>
             </h2>
           </motion.div>
-
-          <motion.button
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="flex items-center gap-2 bg-white/5 border border-white/10 hover:border-white/20 text-white font-bold px-8 py-4 rounded-2xl transition-all"
-          >
-            Créer un club <IconPlus size={18} />
-          </motion.button>
         </div>
 
         {/* Filter pills */}
-        <div className="flex gap-2 sm:gap-3 overflow-x-auto pb-2 sm:pb-0 scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0 flex-nowrap sm:flex-wrap mb-12">
+        <div className="w-full mb-10 sm:mb-12">
+          <div className="flex gap-2 sm:gap-3 overflow-x-auto scrollbar-none whitespace-nowrap snap-x snap-mandatory pr-4 sm:pr-0 pb-3">
           {categories.map(cat => (
             <motion.button
               key={cat}
               onClick={() => setActiveFilter(cat)}
               whileTap={{ scale: 0.95 }}
-              className={`flex-shrink-0 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm rounded-xl whitespace-nowrap font-bold transition-all duration-300 ${
+              className={`flex-shrink-0 snap-start px-3 sm:px-4 py-2 text-xs sm:text-sm rounded-xl whitespace-nowrap font-bold transition-all duration-300 min-h-[44px] ${
                 activeFilter === cat
                   ? 'bg-violet-600 text-white shadow-xl shadow-violet-600/20'
                   : 'bg-white/5 text-white/40 border border-white/5 hover:border-white/15 hover:text-white'
@@ -90,6 +75,7 @@ export default function ClubsSection() {
               {cat}
             </motion.button>
           ))}
+          </div>
         </div>
 
         {/* Cards grid OR Fallback */}
@@ -98,7 +84,7 @@ export default function ClubsSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
-          className="relative min-h-[400px]"
+          className="relative min-h-[340px] sm:min-h-[400px]"
         >
           <AnimatePresence mode="popLayout">
             {filteredClubs.length > 0 ? (
