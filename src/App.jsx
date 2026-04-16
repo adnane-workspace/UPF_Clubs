@@ -28,10 +28,11 @@ export default function App() {
   return (
     <div style={{
       minHeight: '100vh',
-      background: '#08080f',
-      color: 'white',
+      background: 'var(--bg-primary)',
+      color: 'var(--text-primary)',
       overflowX: 'hidden',
-      fontFamily: "'Inter', system-ui, sans-serif"
+      fontFamily: "'Inter', system-ui, sans-serif",
+      transition: 'background-color 0.3s ease, color 0.3s ease'
     }}>
       
       <AnimatePresence mode="wait">

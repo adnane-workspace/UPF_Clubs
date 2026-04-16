@@ -65,9 +65,10 @@ const ClubCard = memo(({ club, onClick }) => {
         transition: 'transform 0.1s ease',
         willChange: 'transform',
         position: 'relative', overflow: 'hidden',
-        background: 'rgba(255,255,255,0.03)',
+        background: 'var(--glass-bg)',
         backdropFilter: 'blur(10px)',
-        border: '0.5px solid rgba(255,255,255,0.08)'
+        border: '1px solid var(--border-color)',
+        transition: 'transform 0.1s ease, background 0.3s ease, border-color 0.3s ease',
       }}
     >
       {/* Glare effect */}
@@ -112,16 +113,16 @@ const ClubCard = memo(({ club, onClick }) => {
 
       {/* Middle: Info */}
       <div className="flex-grow">
-        <h3 className="text-base sm:text-lg lg:text-xl font-semibold mb-1 sm:mb-2 text-white group-hover:text-violet-300 transition-colors">
+        <h3 className="text-base sm:text-lg lg:text-xl font-semibold mb-1 sm:mb-2 text-[var(--text-primary)] group-hover:text-violet-400 transition-colors">
           {club.name}
         </h3>
-        <p className="text-xs sm:text-sm text-white/50 leading-relaxed line-clamp-3">
+        <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed line-clamp-3">
           {club.description}
         </p>
       </div>
 
       {/* Bottom: Avatars & Join */}
-      <div className="mt-10 pt-6 border-t border-white/5 flex items-center justify-between">
+      <div className="mt-10 pt-6 border-t border-[var(--border-color)] flex items-center justify-between">
         <div className="flex -space-x-2">
           {[1, 2, 3].map((i) => (
             <div 
@@ -141,7 +142,7 @@ const ClubCard = memo(({ club, onClick }) => {
           </div>
         </div>
 
-        <button className="flex items-center gap-2 text-sm font-bold text-white/50 group-hover:text-white transition-all">
+        <button className="flex items-center gap-2 text-sm font-bold text-[var(--text-tertiary)] group-hover:text-[var(--text-primary)] transition-all">
           <span className="hidden sm:inline">Rejoindre</span>
           <IconArrowRight 
             size={18} 

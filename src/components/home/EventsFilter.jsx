@@ -43,7 +43,7 @@ const EventCard = ({ event }) => {
       onMouseLeave={handleMouseLeave}
       className="break-inside-avoid mb-8 relative group perspective-1000 will-change-transform"
     >
-      <div className="relative z-10 glass-premium rounded-[32px] overflow-hidden border border-white/5 bg-white/[0.02] hover:bg-white/[0.06] transition-all duration-500 group-hover:shadow-[0_20px_60px_rgba(0,0,0,0.4)]">
+      <div className="relative z-10 glass-premium rounded-[32px] overflow-hidden border border-[var(--border-color)] bg-[var(--bg-secondary)] hover:bg-[var(--bg-tertiary)] transition-all duration-500 group-hover:shadow-[0_20px_60px_rgba(0,0,0,0.1)]">
         
         {/* Top Image Section */}
         <div className="relative h-56 overflow-hidden preserve-3d">
@@ -66,8 +66,8 @@ const EventCard = ({ event }) => {
 
           {/* Date Indicator with Backdrop Blur */}
           <div className="absolute bottom-5 left-5" style={{ transform: "translateZ(50px)" }}>
-            <div className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-2xl bg-[#0a0a0f] border border-white/10 text-white shadow-lg">
-              <IconCalendar size={14} className="text-violet-400" />
+            <div className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-2xl bg-[var(--bg-primary)] border border-[var(--border-color)] text-[var(--text-primary)] shadow-lg">
+              <IconCalendar size={14} className="text-violet-500" />
               <span className="text-xs font-black tracking-tight">{event.date}</span>
             </div>
           </div>
@@ -76,23 +76,23 @@ const EventCard = ({ event }) => {
         {/* Content Section */}
         <div className="p-8 preserve-3d">
           <div className="flex items-center gap-3 mb-4" style={{ transform: "translateZ(30px)" }}>
-             <div className="flex items-center gap-1.5 text-white/40 text-[10px] font-bold uppercase tracking-widest">
+             <div className="flex items-center gap-1.5 text-[var(--text-tertiary)] text-[10px] font-bold uppercase tracking-widest">
                 <IconClock size={12} />
                 <span>{event.time}</span>
              </div>
           </div>
 
-          <h3 className="text-2xl font-black text-white mb-4 leading-tight group-hover:text-violet-400 transition-colors" style={{ transform: "translateZ(60px)" }}>
+          <h3 className="text-2xl font-black text-[var(--text-primary)] mb-4 leading-tight group-hover:text-violet-500 transition-colors" style={{ transform: "translateZ(60px)" }}>
             {event.title}
           </h3>
           
-          <p className="text-slate-400 text-sm leading-relaxed mb-8 line-clamp-3 font-medium" style={{ transform: "translateZ(40px)" }}>
+          <p className="text-[var(--text-secondary)] text-sm leading-relaxed mb-8 line-clamp-3 font-medium" style={{ transform: "translateZ(40px)" }}>
             {event.description}
           </p>
 
-          <div className="flex items-center justify-between pt-6 border-t border-white/5" style={{ transform: "translateZ(30px)" }}>
-            <div className="flex items-center gap-2.5 text-slate-500 group-hover:text-slate-300 transition-colors">
-              <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center">
+          <div className="flex items-center justify-between pt-6 border-t border-[var(--border-color)]" style={{ transform: "translateZ(30px)" }}>
+            <div className="flex items-center gap-2.5 text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">
+              <div className="w-8 h-8 rounded-lg bg-[var(--bg-tertiary)] flex items-center justify-center border border-[var(--border-color)]">
                 <IconMapPin size={14} className="text-violet-500" />
               </div>
               <span className="text-[11px] font-bold tracking-tight">{event.location}</span>
@@ -123,7 +123,7 @@ const EventsFilter = () => {
     : events.filter(e => e.category === activeTab);
 
   return (
-    <section className="py-32 bg-dark-950 relative overflow-hidden">
+    <section className="py-32 bg-[var(--bg-primary)] relative overflow-hidden transition-colors duration-300">
       {/* Decorative Orbs */}
       <div className="absolute top-1/4 -left-20 w-96 h-96 bg-violet-600/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-fuchsia-600/10 rounded-full blur-[120px] pointer-events-none" />
@@ -144,10 +144,10 @@ const EventsFilter = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-5xl sm:text-7xl font-black text-white leading-tight"
+            className="text-5xl sm:text-7xl font-black text-[var(--text-primary)] leading-tight"
           >
             Préparez-vous pour le <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-fuchsia-400">Prochain Chapitre</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-fuchsia-500">Prochain Chapitre</span>
           </motion.h2>
         </div>
 
@@ -164,7 +164,7 @@ const EventsFilter = () => {
               className={`px-8 py-3.5 rounded-2xl text-[13px] font-black transition-all duration-300 border ${
                 activeTab === cat
                   ? 'bg-violet-600 border-violet-500 text-white shadow-[0_10px_25px_rgba(124,58,237,0.4)]'
-                  : 'bg-white/5 border-white/5 text-slate-500 hover:text-white hover:bg-white/10 hover:border-white/10'
+                  : 'bg-[var(--bg-secondary)] border-[var(--border-color)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-tertiary)] hover:border-violet-500/30'
               }`}
             >
               {cat}

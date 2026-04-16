@@ -22,35 +22,35 @@ export default function EventDetailsModal({ event, onClose }) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.98 }}
             transition={{ duration: 0.2 }}
-            className="relative w-full max-w-2xl rounded-2xl border border-white/10 bg-[#0e1018] p-5 sm:p-7 text-left shadow-2xl"
+            className="relative w-full max-w-2xl rounded-2xl border border-[var(--border-color)] bg-[var(--bg-secondary)] p-5 sm:p-7 text-left shadow-2xl"
           >
             <div className="mb-4 flex flex-wrap items-center gap-3">
               <span className="rounded-full bg-violet-600/90 px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-white">
                 {event.category}
               </span>
-              <span className="text-sm text-white/60">par {event.club}</span>
+              <span className="text-sm text-[var(--text-tertiary)]">par {event.club}</span>
             </div>
 
-            <h3 className="text-2xl sm:text-3xl font-black text-white leading-tight mb-4">
+            <h3 className="text-2xl sm:text-3xl font-black text-[var(--text-primary)] leading-tight mb-4">
               {event.title}
             </h3>
 
-            <p className="text-sm sm:text-base text-slate-300 leading-relaxed mb-6">
+            <p className="text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed mb-6">
               {event.description}
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
-              <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3">
-                <p className="text-xs uppercase tracking-wide text-white/45 mb-1">Date</p>
-                <p className="text-sm font-semibold text-white">{event.date}</p>
+              <div className="rounded-xl border border-[var(--border-color)] bg-[var(--bg-tertiary)] px-4 py-3">
+                <p className="text-xs uppercase tracking-wide text-[var(--text-tertiary)] mb-1">Date</p>
+                <p className="text-sm font-semibold text-[var(--text-primary)]">{event.date}</p>
               </div>
-              <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3">
-                <p className="text-xs uppercase tracking-wide text-white/45 mb-1">Heure</p>
-                <p className="text-sm font-semibold text-white">{event.time}</p>
+              <div className="rounded-xl border border-[var(--border-color)] bg-[var(--bg-tertiary)] px-4 py-3">
+                <p className="text-xs uppercase tracking-wide text-[var(--text-tertiary)] mb-1">Heure</p>
+                <p className="text-sm font-semibold text-[var(--text-primary)]">{event.time}</p>
               </div>
-              <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3">
-                <p className="text-xs uppercase tracking-wide text-white/45 mb-1">Lieu</p>
-                <p className="text-sm font-semibold text-white">{event.location}</p>
+              <div className="rounded-xl border border-[var(--border-color)] bg-[var(--bg-tertiary)] px-4 py-3">
+                <p className="text-xs uppercase tracking-wide text-[var(--text-tertiary)] mb-1">Lieu</p>
+                <p className="text-sm font-semibold text-[var(--text-primary)]">{event.location}</p>
               </div>
             </div>
 

@@ -51,9 +51,9 @@ const cardVariants = {
 
 export default function WhyJoinSection() {
   return (
-    <section className="relative py-24 bg-[#08080f] overflow-hidden">
+    <section className="relative py-24 bg-[var(--bg-primary)] overflow-hidden transition-colors duration-300">
       {/* Separator Line Top */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--border-color)] to-transparent" />
       
       <div className="container mx-auto px-6 max-w-6xl">
         <div className="text-center mb-16">
@@ -61,7 +61,7 @@ export default function WhyJoinSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl sm:text-5xl font-black text-white"
+            className="text-4xl sm:text-5xl font-black text-[var(--text-primary)]"
           >
             Pourquoi <span className="gradient-text">rejoindre</span> un club ?
           </motion.h2>
@@ -78,8 +78,8 @@ export default function WhyJoinSection() {
             <motion.div
               key={i}
               variants={cardVariants}
-              whileHover={{ scale: 1.02, borderColor: 'rgba(124, 58, 237, 0.4)' }}
-              className="glass p-8 rounded-[32px] border border-white/5 bg-white/[0.02] flex items-start gap-6 transition-colors group"
+              whileHover={{ scale: 1.02, borderColor: 'var(--accent-primary)' }}
+              className="p-8 rounded-[32px] border border-[var(--border-color)] bg-[var(--bg-secondary)] flex items-start gap-6 transition-all duration-300 group hover:bg-[var(--bg-tertiary)] shadow-sm"
             >
               <div 
                 className="flex-shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center text-2xl"
@@ -88,10 +88,10 @@ export default function WhyJoinSection() {
                 {benefit.icon}
               </div>
               <div>
-                <h3 className="text-xl font-bold text-white mb-3 tracking-tight">
+                <h3 className="text-xl font-bold text-[var(--text-primary)] mb-3 tracking-tight">
                   {benefit.title}
                 </h3>
-                <p className="text-white/50 text-sm leading-relaxed font-medium">
+                <p className="text-[var(--text-secondary)] text-sm leading-relaxed font-medium">
                   {benefit.description}
                 </p>
               </div>
@@ -101,7 +101,7 @@ export default function WhyJoinSection() {
       </div>
 
       {/* Separator Line Bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--border-color)] to-transparent" />
     </section>
   );
 }

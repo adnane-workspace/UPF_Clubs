@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 
 export default function CTASection() {
   return (
-    <section className="relative w-full py-20 px-6 overflow-hidden flex justify-center items-center">
+    <section className="relative w-full py-20 px-6 overflow-hidden flex justify-center items-center bg-[var(--bg-primary)] transition-colors duration-300">
       {/* Background Rotating Orb */}
       <div 
         className="absolute top-1/2 left-1/2 w-[600px] h-[600px] rounded-full blur-[100px] opacity-20 pointer-events-none"
@@ -27,13 +27,13 @@ export default function CTASection() {
         whileInView={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
         viewport={{ once: true, amount: 0.2 }}
-        className="relative z-10 w-full max-w-5xl bg-white/[0.02] border border-white/10 rounded-3xl p-10 md:p-16 text-center backdrop-blur-xl"
+        className="relative z-10 w-full max-w-5xl bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-3xl p-10 md:p-16 text-center backdrop-blur-xl shadow-xl"
       >
         {/* Title & Subtitle */}
         <h2 className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-cyan-400 mb-6 tracking-tight pb-2">
           Prêt à vivre l'expérience UPF ?
         </h2>
-        <p className="text-white/70 text-lg md:text-xl font-medium max-w-2xl mx-auto mb-12 leading-relaxed">
+        <p className="text-[var(--text-secondary)] text-lg md:text-xl font-medium max-w-2xl mx-auto mb-12 leading-relaxed">
           Rejoins une communauté de 800+ étudiants passionnés. Les inscriptions pour la rentrée 2024-2025 sont ouvertes.
         </p>
 
@@ -49,28 +49,28 @@ export default function CTASection() {
           </motion.button>
           
           <motion.button
-            whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.05)" }}
+            whileHover={{ scale: 1.05, backgroundColor: "var(--bg-tertiary)" }}
             whileTap={{ scale: 0.95 }}
             transition={{ type: "spring", stiffness: 400, damping: 20 }}
-            className="w-full sm:w-auto px-8 py-4 border border-white/20 bg-transparent text-white font-bold rounded-xl transition-colors"
+            className="w-full sm:w-auto px-8 py-4 border border-[var(--border-color)] bg-transparent text-[var(--text-primary)] font-bold rounded-xl transition-colors"
           >
             Nous contacter
           </motion.button>
         </div>
 
         {/* Trust Badges */}
-        <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10 border-t border-white/5 pt-8">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10 border-t border-[var(--border-color)] pt-8">
           <div className="flex items-center gap-2">
-            <span className="text-green-400 font-bold">✓</span>
-            <span className="text-white/40 text-sm font-medium">Gratuit pour tous les étudiants UPF</span>
+            <span className="text-green-500 font-bold">✓</span>
+            <span className="text-[var(--text-tertiary)] text-sm font-medium">Gratuit pour tous les étudiants UPF</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-green-400 font-bold">✓</span>
-            <span className="text-white/40 text-sm font-medium">Pas d'engagement — quitte quand tu veux</span>
+            <span className="text-green-500 font-bold">✓</span>
+            <span className="text-[var(--text-tertiary)] text-sm font-medium">Pas d'engagement — quitte quand tu veux</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-green-400 font-bold">✓</span>
-            <span className="text-white/40 text-sm font-medium">Certificat de participation délivré</span>
+            <span className="text-green-500 font-bold">✓</span>
+            <span className="text-[var(--text-tertiary)] text-sm font-medium">Certificat de participation délivré</span>
           </div>
         </div>
       </motion.div>

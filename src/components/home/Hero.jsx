@@ -65,8 +65,9 @@ export default function Hero() {
       paddingBottom: '40px',
       paddingLeft: '16px',
       paddingRight: '16px',
-      backgroundColor: '#08080f',
-      width: '100%'
+      backgroundColor: 'var(--bg-primary)',
+      width: '100%',
+      transition: 'background-color 0.3s ease'
     }}>
       {/* ── BACKGROUND ELEMENTS (Pure CSS) ── */}
       {/* Aurora layer 1 - purple */}
@@ -102,8 +103,8 @@ export default function Hero() {
       {/* Grid overlay */}
       <div style={{
         position: 'absolute', inset: 0, pointerEvents: 'none',
-        backgroundImage: 'linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px)',
-        backgroundSize: '50px 50px', zIndex: 0
+        backgroundImage: 'linear-gradient(var(--border-color) 1px, transparent 1px), linear-gradient(90deg, var(--border-color) 1px, transparent 1px)',
+        backgroundSize: '80px 80px', zIndex: 0, opacity: 0.5
       }} />
 
       {/* ── CONTENT ── */}
@@ -125,10 +126,10 @@ export default function Hero() {
           {/* Badge chip */}
           <motion.div 
             variants={itemVariants}
-            className="inline-flex items-center gap-2 px-4 py-1.5 mb-10 rounded-full border border-white/10 bg-[#13151f]"
+            className="inline-flex items-center gap-2 px-4 py-1.5 mb-10 rounded-full border border-[var(--border-color)] bg-[var(--bg-secondary)] shadow-sm"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-violet-500 animate-pulse" />
-            <span className="text-white/50 text-[10px] uppercase font-bold tracking-[0.2em]">
+            <span className="text-[var(--text-tertiary)] text-[10px] uppercase font-bold tracking-[0.2em]">
               🎓 Bienvenue à l'UPF • Rentrée 2024-2025
             </span>
           </motion.div>
@@ -140,9 +141,9 @@ export default function Hero() {
               text-[clamp(36px,8vw,88px)] xl:text-[clamp(64px,6vw,100px)]
               mb-4 sm:mb-6
             ">
-              <span style={{ color: 'white' }}>Rejoins</span>
+              <span className="text-[var(--text-primary)]">Rejoins</span>
               <br />
-              <span style={{ color: 'white' }}>l'espace de </span>
+              <span className="text-[var(--text-primary)]">l'espace de </span>
               <span style={{ display: 'inline-block', position: 'relative', minWidth: 'clamp(160px, 45vw, 280px)' }}>
                 <AnimatePresence mode="wait">
                   <motion.span
@@ -170,7 +171,7 @@ export default function Hero() {
           <motion.p
             variants={fadeVariants}
             className="
-              text-white/40 leading-relaxed mx-auto font-medium
+              text-[var(--text-secondary)] leading-relaxed mx-auto font-medium
               text-sm sm:text-base md:text-lg
               max-w-xs sm:max-w-md md:max-w-lg lg:max-w-2xl
               mb-6 sm:mb-8
@@ -206,14 +207,14 @@ export default function Hero() {
             </motion.button>
             <motion.button
               onClick={() => scrollToSection('evenements')}
-              whileHover={{ backgroundColor: "rgba(255,255,255,0.1)", borderColor: "rgba(255,255,255,0.2)" }}
+              whileHover={{ backgroundColor: "var(--bg-tertiary)", borderColor: "var(--accent-primary)" }}
               whileTap={{ scale: 0.97 }}
               transition={{ type: "spring", stiffness: 400, damping: 20 }}
               className="
                 w-full xs:w-auto
                 px-6 sm:px-8 py-3 sm:py-4
-                text-sm sm:text-base font-bold text-white
-                border border-white/10 bg-[#13151f]
+                text-sm sm:text-base font-bold text-[var(--text-primary)]
+                border border-[var(--border-color)] bg-[var(--bg-secondary)]
                 rounded-xl sm:rounded-2xl transition-colors
               "
             >
@@ -229,13 +230,13 @@ export default function Hero() {
             <div style={{ display: 'flex' }}>
               {['#7c3aed', '#2563eb', '#06b6d4', '#ec4899'].map((color, i) => (
                 <div key={i} style={{
-                  background: color, border: '2px solid #08080f',
+                  background: color, border: '2px solid var(--bg-primary)',
                   marginLeft: i > 0 ? '-8px' : 0
                 }} className="w-6 h-6 sm:w-7 sm:h-7 rounded-full" />
               ))}
             </div>
-            <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.4)' }}>
-              <span style={{ color: 'white', fontWeight: 600 }}>800+ étudiants</span>
+            <span style={{ fontSize: '13px', color: 'var(--text-tertiary)' }}>
+              <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>800+ étudiants</span>
               {' '}ont déjà rejoint un club
             </span>
           </motion.div>

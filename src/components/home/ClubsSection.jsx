@@ -29,7 +29,7 @@ export default function ClubsSection() {
 
   return (
     <section 
-      className="relative bg-[#08080f]"
+      className="relative bg-[var(--bg-primary)] transition-colors duration-300"
       style={{
         paddingTop: 'clamp(60px, 10vh, 120px)',
         paddingBottom: 'clamp(60px, 10vh, 120px)',
@@ -51,7 +51,7 @@ export default function ClubsSection() {
               <span className="w-10 h-[1.5px] bg-violet-500 rounded-full" /> 
               Communauté
             </span>
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white leading-tight">
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-[var(--text-primary)] leading-tight">
               Rejoins ton <br />
               <span className="gradient-text">Espace de Passion</span>
             </h2>
@@ -69,7 +69,7 @@ export default function ClubsSection() {
               className={`flex-shrink-0 snap-start px-3 sm:px-4 py-2 text-xs sm:text-sm rounded-xl whitespace-nowrap font-bold transition-all duration-300 min-h-[44px] ${
                 activeFilter === cat
                   ? 'bg-violet-600 text-white shadow-xl shadow-violet-600/20'
-                  : 'bg-white/5 text-white/40 border border-white/5 hover:border-white/15 hover:text-white'
+                  : 'bg-[var(--bg-tertiary)] text-[var(--text-tertiary)] border border-[var(--border-color)] hover:border-violet-500/50 hover:text-[var(--text-primary)]'
               }`}
             >
               {cat}

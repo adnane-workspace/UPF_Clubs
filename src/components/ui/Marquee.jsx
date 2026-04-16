@@ -21,20 +21,21 @@ export default function Marquee() {
   return (
     <div style={{
       overflow: 'hidden', padding: '20px 0',
-      borderTop: '0.5px solid rgba(255,255,255,0.05)',
-      borderBottom: '0.5px solid rgba(255,255,255,0.05)',
-      background: 'rgba(255,255,255,0.01)',
-      position: 'relative'
+      borderTop: '1px solid var(--border-color)',
+      borderBottom: '1px solid var(--border-color)',
+      background: 'var(--bg-primary)',
+      position: 'relative',
+      transition: 'background-color 0.3s ease, border-color 0.3s ease'
     }}>
       {/* Fade edges */}
       <div style={{
         position: 'absolute', left: 0, top: 0, bottom: 0, width: '120px',
-        background: 'linear-gradient(90deg, #08080f, transparent)',
+        background: 'linear-gradient(90deg, var(--bg-primary), transparent)',
         zIndex: 2, pointerEvents: 'none'
       }} />
       <div style={{
         position: 'absolute', right: 0, top: 0, bottom: 0, width: '120px',
-        background: 'linear-gradient(-90deg, #08080f, transparent)',
+        background: 'linear-gradient(-90deg, var(--bg-primary), transparent)',
         zIndex: 2, pointerEvents: 'none'
       }} />
 
@@ -49,7 +50,7 @@ export default function Marquee() {
         style={{ display: 'flex', gap: isMobile ? '32px' : '48px', whiteSpace: 'nowrap' }}
       >
         {displayItems.map((item, i) => (
-          <span key={i} className="text-xs sm:text-sm text-white/35 flex items-center gap-2 shrink-0">
+          <span key={i} className="text-xs sm:text-sm text-[var(--text-tertiary)] flex items-center gap-2 shrink-0">
             {item}
             <span style={{
               width: '4px', height: '4px', borderRadius: '50%',

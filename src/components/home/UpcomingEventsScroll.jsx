@@ -9,7 +9,7 @@ const pad = (n) => String(n).padStart(2, '0');
 const EventSlide = memo(({ ev, idx, slideRef, onShowDetails }) => (
   <div
     ref={slideRef}
-    className="relative flex-shrink-0 bg-[#0a0a0f] flex flex-col lg:flex-row overflow-hidden"
+    className="relative flex-shrink-0 bg-[var(--bg-primary)] flex flex-col lg:flex-row overflow-hidden transition-colors duration-300"
     style={{ minWidth: '100%', height: '100%', scrollSnapAlign: 'start' }}
   >
     <div className="relative z-20 flex flex-col justify-between w-full lg:w-[55%] h-full px-4 sm:px-8 lg:px-16 pt-10 sm:pt-14 pb-24 sm:pb-16">
@@ -20,7 +20,7 @@ const EventSlide = memo(({ ev, idx, slideRef, onShowDetails }) => (
         className="flex items-center gap-3"
       >
         <span className={`w-8 h-0.5 rounded-full bg-gradient-to-r ${ev.color}`} />
-        <span className="text-white/60 text-xs font-bold uppercase tracking-[0.2em]">Événement à venir</span>
+        <span className="text-[var(--text-tertiary)] text-xs font-bold uppercase tracking-[0.2em]">Événement à venir</span>
       </motion.div>
 
       <motion.div
@@ -30,21 +30,21 @@ const EventSlide = memo(({ ev, idx, slideRef, onShowDetails }) => (
         transition={{ duration: 0.6 }}
       >
         <div className="flex items-center gap-3 mb-4 sm:mb-5 flex-wrap">
-          <span className={`inline-block bg-gradient-to-r ${ev.color} text-white text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full`}>
+          <span className={`inline-block bg-gradient-to-r ${ev.color} text-white text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full shadow-lg`}>
             {ev.category}
           </span>
-          <span className="text-white/45 text-sm">par <span className="text-white/75 font-semibold">{ev.club}</span></span>
+          <span className="text-[var(--text-tertiary)] text-sm">par <span className="text-[var(--text-primary)] font-semibold">{ev.club}</span></span>
         </div>
-        <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white leading-tight mb-5 sm:mb-6">{ev.title}</h2>
-        <p className="text-slate-300/90 text-sm sm:text-base leading-relaxed mb-6 sm:mb-8 max-w-lg">{ev.description}</p>
+        <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-[var(--text-primary)] leading-tight mb-5 sm:mb-6">{ev.title}</h2>
+        <p className="text-[var(--text-secondary)] text-sm sm:text-base leading-relaxed mb-6 sm:mb-8 max-w-lg">{ev.description}</p>
         <div className="flex flex-wrap gap-3 sm:gap-4 mb-6 sm:mb-8">
-            <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl px-4 py-2">
+            <div className="flex items-center gap-2 bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-xl px-4 py-2">
               <IconCalendar size={14} className="text-violet-500" />
-              <span className="text-white text-sm">{ev.date}</span>
+              <span className="text-[var(--text-primary)] text-sm font-semibold">{ev.date}</span>
             </div>
-            <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl px-4 py-2">
+            <div className="flex items-center gap-2 bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-xl px-4 py-2">
               <IconClock size={14} className="text-violet-500" />
-              <span className="text-white text-sm">{ev.time}</span>
+              <span className="text-[var(--text-primary)] text-sm font-semibold">{ev.time}</span>
             </div>
         </div>
         <button
@@ -56,7 +56,7 @@ const EventSlide = memo(({ ev, idx, slideRef, onShowDetails }) => (
         </button>
       </motion.div>
 
-      <div className="text-white/20 text-base sm:text-xl font-black">{pad(idx + 1)} / {pad(upcomingEvents.length)}</div>
+      <div className="text-[var(--text-tertiary)] text-base sm:text-xl font-black">{pad(idx + 1)} / {pad(upcomingEvents.length)}</div>
     </div>
 
     <div className="hidden lg:block w-[45%] h-full p-6">
@@ -94,7 +94,7 @@ export default function UpcomingEventsScroll() {
   const scrollTo = (idx) => slideRefs.current[idx]?.scrollIntoView({ behavior: 'smooth', inline: 'start' });
 
   return (
-    <section className="relative bg-[#0a0a0f] h-[100svh] overflow-hidden">
+    <section className="relative bg-[var(--bg-primary)] h-[100svh] overflow-hidden transition-colors duration-300">
       <div
         ref={containerRef}
         className="flex h-full overflow-x-auto snap-x snap-mandatory hide-scrollbar"
@@ -117,10 +117,10 @@ export default function UpcomingEventsScroll() {
             <button
               key={i}
               onClick={() => scrollTo(i)}
-              className="relative h-1 w-6 sm:w-8 bg-white/10 rounded-full overflow-hidden"
+              className="relative h-1 w-6 sm:w-8 bg-[var(--border-color)] rounded-full overflow-hidden"
             >
               <motion.div
-                className="absolute inset-0 bg-white"
+                className="absolute inset-0 bg-violet-600"
                 initial={false}
                 animate={{ scaleX: i === activeIdx ? 1 : 0, opacity: i === activeIdx ? 1 : 0 }}
                 style={{ originX: 0 }}

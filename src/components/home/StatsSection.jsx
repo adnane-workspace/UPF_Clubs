@@ -39,12 +39,12 @@ const StatCard = memo(({ stat, index, shouldStart }) => {
         damping: 20,
         delay: index * 0.1
       }}
-      className="bg-white/[0.02] border border-white/[0.06] rounded-2xl text-center p-5 sm:p-6 lg:p-8 flex flex-col items-center justify-center group hover:bg-white/[0.04] transition-all duration-500"
+      className="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-2xl text-center p-5 sm:p-6 lg:p-8 flex flex-col items-center justify-center group hover:bg-[var(--bg-tertiary)] transition-all duration-500 shadow-sm"
     >
       <div className="font-black leading-none text-4xl sm:text-5xl lg:text-6xl mb-1 sm:mb-2 gradient-text py-2">
         {count}{stat.suffix}
       </div>
-      <div className="text-xs sm:text-sm text-white/40 mt-1 sm:mt-2 font-medium tracking-wide">
+      <div className="text-xs sm:text-sm text-[var(--text-tertiary)] mt-1 sm:mt-2 font-medium tracking-wide">
         {stat.label}
       </div>
     </motion.div>
@@ -58,7 +58,7 @@ export default function StatsSection() {
   return (
     <section 
       ref={containerRef}
-      className="relative bg-[#0a0a0f] overflow-hidden"
+      className="relative bg-[var(--bg-primary)] overflow-hidden transition-colors duration-300"
       style={{
         paddingTop: 'clamp(60px, 10vh, 120px)',
         paddingBottom: 'clamp(60px, 10vh, 120px)',
@@ -75,7 +75,7 @@ export default function StatsSection() {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-white/30 text-xs uppercase font-bold tracking-[0.4em] block mb-4"
+            className="text-[var(--text-tertiary)] text-xs uppercase font-bold tracking-[0.4em] block mb-4"
           >
             En chiffres
           </motion.span>
@@ -84,7 +84,7 @@ export default function StatsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="font-black text-center mb-10 sm:mb-16 text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-tight text-white"
+            className="font-black text-center mb-10 sm:mb-16 text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-tight text-[var(--text-primary)]"
           >
             L'excellence d'une <span className="gradient-text">Communauté</span>
           </motion.h2>

@@ -27,6 +27,33 @@
 
   --font-sans: "Inter", "Poppins", ui-sans-serif, system-ui, sans-serif;
   --breakpoint-xs: 375px;
+
+  /* CSS Variables for Theme */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-tertiary: #f1f5f9;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-tertiary: #94a3b8;
+  --border-color: rgba(0, 0, 0, 0.08);
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --accent-primary: #7c3aed;
+  --nav-bg: rgba(255, 255, 255, 0.8);
+  --shimmer-color: rgba(255, 255, 255, 0.6);
+}
+
+.dark {
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #0f0f1a;
+  --bg-tertiary: #161625;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --text-tertiary: rgba(255, 255, 255, 0.4);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --accent-primary: #a78bfa;
+  --nav-bg: rgba(8, 8, 15, 0.82);
+  --shimmer-color: rgba(255, 255, 255, 0.2);
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@600;700;800&display=swap');
@@ -49,23 +76,10 @@
     -webkit-tap-highlight-color: transparent;
   }
 
-  button, a, [role="button"] {
-    min-height: 44px;
-    min-width: 44px;
-    touch-action: manipulation;
-    user-select: none;
-    -webkit-user-select: none;
-  }
-
-  @media (hover: none) {
-    .card-hover-effect:active {
-      transform: scale(0.98);
-      transition: transform 0.1s ease;
-    }
-  }
-
   body {
-    @apply bg-[#0a0a0f] text-white font-sans antialiased;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    @apply font-sans antialiased transition-colors duration-300;
     overflow-x: hidden;
   }
 }
@@ -81,8 +95,8 @@
   }
 
   .glass {
-    background: rgba(255, 255, 255, 0.03);
-    border: 0.5px solid rgba(255, 255, 255, 0.08);
+    background: var(--glass-bg);
+    border: 1px solid var(--border-color);
   }
 
   .orb {
@@ -95,8 +109,8 @@
 
   .grid-bg {
     background-image: 
-      linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      linear-gradient(to right, var(--border-color) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--border-color) 1px, transparent 1px);
     background-size: 40px 40px;
   }
 
@@ -112,14 +126,14 @@
     background: linear-gradient(
       to right,
       transparent,
-      rgba(255, 255, 255, 0.2),
+      var(--shimmer-color),
       transparent
     );
     animation: shimmer-sweep 3s infinite;
   }
 
   .hero-bg {
-    background: linear-gradient(-45deg, #08080f, #0d0520, #080f20, #08080f);
+    background: linear-gradient(-45deg, var(--bg-primary), var(--bg-secondary), var(--bg-primary));
     background-size: 400% 400%;
     animation: gradientShift 12s ease infinite;
   }

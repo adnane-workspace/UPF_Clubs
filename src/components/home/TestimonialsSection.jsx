@@ -43,7 +43,7 @@ const cardVariants = {
 
 export default function TestimonialsSection() {
   return (
-    <section className="relative py-24 overflow-hidden">
+    <section className="relative py-24 bg-[var(--bg-primary)] overflow-hidden transition-colors duration-300">
       {/* Aurora Background Elements */}
       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full blur-[120px] bg-violet-600/10 pointer-events-none" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full blur-[120px] bg-cyan-600/10 pointer-events-none" />
@@ -52,8 +52,8 @@ export default function TestimonialsSection() {
         
         {/* Title */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight mb-4">
-            Ce que disent nos <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-cyan-400">étudiants</span>
+          <h2 className="text-4xl md:text-5xl font-black text-[var(--text-primary)] tracking-tight mb-4">
+            Ce que disent nos <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-cyan-500">étudiants</span>
           </h2>
         </div>
 
@@ -76,12 +76,12 @@ export default function TestimonialsSection() {
               }}
               style={{
                 position: 'relative',
-                background: 'rgba(255,255,255,0.03)',
+                background: 'var(--bg-secondary)',
                 backdropFilter: 'blur(10px)',
-                border: '1px solid rgba(255,255,255,0.08)',
+                border: '1px solid var(--border-color)',
                 borderRadius: '24px',
                 padding: '32px',
-                transition: 'border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease'
+                transition: 'border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease'
               }}
               className="flex flex-col h-full cursor-pointer group"
             >
@@ -95,12 +95,12 @@ export default function TestimonialsSection() {
               </div>
 
               {/* Text */}
-              <p className="text-white/80 font-medium leading-relaxed mb-8 flex-grow relative z-10 text-[15px]">
+              <p className="text-[var(--text-secondary)] font-medium leading-relaxed mb-8 flex-grow relative z-10 text-[15px]">
                 {testi.text}
               </p>
 
               {/* Author */}
-              <div className="flex items-center gap-4 relative z-10 mt-auto pt-6 border-t border-white/5">
+              <div className="flex items-center gap-4 relative z-10 mt-auto pt-6 border-t border-[var(--border-color)]">
                 <div 
                   className="w-12 h-12 rounded-full flex items-center justify-center font-bold text-white text-lg"
                   style={{ backgroundColor: testi.color }}
@@ -108,8 +108,8 @@ export default function TestimonialsSection() {
                   {testi.avatar}
                 </div>
                 <div>
-                  <h4 className="font-bold text-white text-[15px]">{testi.name}</h4>
-                  <p className="text-white/50 text-[13px] font-medium">{testi.role}</p>
+                  <h4 className="font-bold text-[var(--text-primary)] text-[15px]">{testi.name}</h4>
+                  <p className="text-[var(--text-tertiary)] text-[13px] font-medium">{testi.role}</p>
                 </div>
               </div>
             </motion.div>

@@ -38,11 +38,12 @@ export default function ClubModal({ club, onClose }) {
             bottom-0 left-0 right-0
             md:relative md:bottom-auto md:left-auto md:right-auto
             md:max-w-[500px] md:w-full md:mx-auto
-            bg-[#0f0f1a]
+            bg-[var(--bg-secondary)]
             rounded-t-3xl md:rounded-3xl
             p-6 sm:p-8
             max-h-[90vh] overflow-y-auto
-            border border-white/10
+            border border-[var(--border-color)]
+            transition-colors duration-300
           "
         >
           {/* Mobile drag handle */}
@@ -50,10 +51,10 @@ export default function ClubModal({ club, onClose }) {
           {/* Close button */}
           <button onClick={onClose} style={{
             position: 'absolute', top: '16px', right: '16px',
-            background: 'rgba(255,255,255,0.05)',
-            border: '0.5px solid rgba(255,255,255,0.1)',
+            background: 'var(--glass-bg)',
+            border: '1px solid var(--border-color)',
             borderRadius: '8px', width: '32px', height: '32px',
-            color: 'white', cursor: 'pointer', fontSize: '16px'
+            color: 'var(--text-primary)', cursor: 'pointer', fontSize: '16px'
           }}>×</button>
 
           {/* Club logo + name */}
@@ -73,7 +74,7 @@ export default function ClubModal({ club, onClose }) {
               />
             </div>
             <div>
-              <h2 style={{ fontSize: '24px', fontWeight: 800, color: 'white', margin: 0, letterSpacing: '-0.02em' }}>{club.name}</h2>
+              <h2 style={{ fontSize: '24px', fontWeight: 800, color: 'var(--text-primary)', margin: 0, letterSpacing: '-0.02em' }}>{club.name}</h2>
               <span style={{
                 fontSize: '12px', padding: '4px 12px', borderRadius: '100px',
                 background: 'rgba(124,58,237,0.15)',
@@ -84,7 +85,7 @@ export default function ClubModal({ club, onClose }) {
           </div>
 
           {/* Description */}
-          <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.7, marginBottom: '24px' }}>
+          <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '24px' }}>
             {club.description}
           </p>
 
@@ -96,12 +97,12 @@ export default function ClubModal({ club, onClose }) {
               { label: 'Fondé en', value: '2019' }
             ].map(stat => (
               <div key={stat.label} style={{
-                background: 'rgba(255,255,255,0.03)',
-                border: '0.5px solid rgba(255,255,255,0.06)',
+                background: 'var(--bg-tertiary)',
+                border: '1px solid var(--border-color)',
                 borderRadius: '12px', padding: '12px', textAlign: 'center'
               }}>
-                <div style={{ fontSize: '20px', fontWeight: 700, color: 'white' }}>{stat.value}</div>
-                <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.3)', marginTop: '2px' }}>{stat.label}</div>
+                <div style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary)' }}>{stat.value}</div>
+                <div style={{ fontSize: '11px', color: 'var(--text-tertiary)', marginTop: '2px' }}>{stat.label}</div>
               </div>
             ))}
           </div>

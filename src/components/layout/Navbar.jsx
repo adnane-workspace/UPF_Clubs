@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import logo from '../../assets/logo.svg';
+import ThemeToggle from '../ui/ThemeToggle';
 
 const navLinks = [
   { label: 'Événements', href: '#evenements' },
@@ -131,15 +132,15 @@ export default function Navbar() {
     <motion.nav
       initial={false}
       animate={{ y: 0, opacity: 1 }}
-      className="font-sans fixed top-0 left-0 right-0 mx-auto z-[1100] h-16 w-full max-w-[1400px] flex items-center justify-between px-3 sm:px-5 lg:px-8"
+      className="font-sans fixed top-0 left-0 right-0 mx-auto z-[1100] h-16 w-full max-w-[1400px] flex items-center justify-between px-3 sm:px-5 lg:px-8 transition-colors duration-300"
       style={{
         overflow: menuOpen ? 'visible' : 'hidden',
-        background: isScrolled ? 'rgba(8, 8, 15, 0.82)' : 'rgba(8, 8, 15, 0.5)',
+        background: isScrolled ? 'var(--nav-bg)' : 'transparent',
         backdropFilter: 'blur(20px) saturate(180%)',
         WebkitBackdropFilter: 'blur(20px) saturate(180%)',
         transition: 'background 0.25s ease, border-color 0.25s ease',
-        borderBottom: isScrolled ? '1px solid rgba(255,255,255,0.08)' : '1px solid rgba(255,255,255,0.04)',
-        boxShadow: '0 8px 30px rgba(0,0,0,0.24)'
+        borderBottom: isScrolled ? '1px solid var(--border-color)' : '1px solid transparent',
+        boxShadow: isScrolled ? '0 8px 30px rgba(0,0,0,0.1)' : 'none'
       }}
     >
         {/* LOGO */}
@@ -172,7 +173,7 @@ export default function Navbar() {
                   style={{
                     background: 'none',
                     border: 'none',
-                    color: active ? 'white' : 'rgba(255,255,255,0.58)',
+                    color: active ? 'var(--text-primary)' : 'var(--text-tertiary)',
                     cursor: 'pointer'
                   }}
                 >
@@ -195,24 +196,26 @@ export default function Navbar() {
         </div>
 
         {/* RIGHT ACTIONS */}
-        <div className="flex items-center gap-2 sm:gap-5">
+        <div className="flex items-center gap-2 sm:gap-4 ml-auto md:ml-0">
+          <ThemeToggle />
+          
           <motion.button
             type="button"
             whileHover={{ scale: 1.04, boxShadow: '0 0 20px rgba(124,58,237,0.35)' }}
             whileTap={{ scale: 0.97 }}
-            className="hidden lg:flex items-center gap-2 relative shrink-0"
+            className="hidden sm:flex items-center gap-2 relative shrink-0"
             style={{
               background: 'linear-gradient(135deg, #7c3aed, #2563eb)',
               color: 'white', border: 'none',
               borderRadius: '100px',
-              padding: '9px 22px',
-              fontSize: '14px', fontWeight: 600,
+              padding: '8px 20px',
+              fontSize: '13px', fontWeight: 600,
               cursor: 'pointer',
               whiteSpace: 'nowrap'
             }}
           >
             Rejoindre
-            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-[#08080f] animate-pulse" />
+            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-[var(--bg-primary)] animate-pulse" />
           </motion.button>
 
           {/* MOBILE TOGGLE */}
@@ -226,15 +229,15 @@ export default function Navbar() {
           >
             <motion.span 
               variants={lineVariants.top} animate={menuOpen ? "open" : "closed"}
-              className="w-6 h-0.5 bg-white rounded-full origin-center"
+              className="w-6 h-0.5 bg-[var(--text-primary)] rounded-full origin-center"
             />
             <motion.span 
               variants={lineVariants.middle} animate={menuOpen ? "open" : "closed"}
-              className="w-6 h-0.5 bg-white rounded-full origin-center"
+              className="w-6 h-0.5 bg-[var(--text-primary)] rounded-full origin-center"
             />
             <motion.span 
               variants={lineVariants.bottom} animate={menuOpen ? "open" : "closed"}
-              className="w-6 h-0.5 bg-white rounded-full origin-center"
+              className="w-6 h-0.5 bg-[var(--text-primary)] rounded-full origin-center"
             />
           </button>
         </div>
@@ -248,7 +251,7 @@ export default function Navbar() {
             initial="closed"
             animate="open"
             exit="closed"
-            className="md:hidden absolute top-full left-0 right-0 bg-black/95 backdrop-blur-2xl border-b border-white/10 overflow-hidden max-h-[calc(100svh-64px)] overflow-y-auto"
+            className="md:hidden absolute top-full left-0 right-0 bg-[var(--nav-bg)] backdrop-blur-2xl border-b border-[var(--border-color)] overflow-hidden max-h-[calc(100svh-64px)] overflow-y-auto"
           >
             <nav className="flex flex-col gap-1 px-4 py-4 pb-[calc(env(safe-area-inset-bottom)+16px)]">
               {navLinks.map((link) => (
@@ -258,10 +261,10 @@ export default function Navbar() {
                   variants={itemVariants}
                   onClick={() => handleNavClick(link.href)}
                   className={`text-base font-semibold min-h-[48px] px-3 rounded-xl ${
-                    activeSection === link.href ? 'text-white bg-white/10' : 'text-white/70'
+                    activeSection === link.href ? 'text-violet-500 bg-[var(--bg-tertiary)]' : 'text-[var(--text-secondary)]'
                   }`}
                   style={{
-                    backgroundColor: activeSection === link.href ? 'rgba(255,255,255,0.08)' : 'transparent',
+                    backgroundColor: activeSection === link.href ? 'var(--bg-tertiary)' : 'transparent',
                     border: 'none',
                     textAlign: 'left',
                     cursor: 'pointer'

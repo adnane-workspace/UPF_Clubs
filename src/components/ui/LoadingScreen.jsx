@@ -1,7 +1,8 @@
-import { motion, AnimatePresence } from 'framer-motion'
 import { useEffect, useState } from 'react'
+import { useTheme } from '../../context/ThemeContext'
 
 export default function LoadingScreen({ onComplete }) {
+  const { theme } = useTheme()
   const [progress, setProgress] = useState(0)
   const [done, setDone] = useState(false)
 
@@ -34,7 +35,7 @@ export default function LoadingScreen({ onComplete }) {
           transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
           style={{
             position: 'fixed', inset: 0, zIndex: 9999,
-            background: '#08080f',
+            background: 'var(--bg-primary)',
             display: 'flex', flexDirection: 'column',
             alignItems: 'center', justifyContent: 'center',
             gap: '32px'
@@ -72,7 +73,7 @@ export default function LoadingScreen({ onComplete }) {
               UPF Clubs
             </div>
             <div style={{
-              fontSize: '13px', color: 'rgba(255,255,255,0.3)',
+              fontSize: '13px', color: 'var(--text-tertiary)',
               marginTop: '6px', letterSpacing: '0.1em'
             }}>
               UNIVERSITÉ PRIVÉE DE FÈS
@@ -87,7 +88,7 @@ export default function LoadingScreen({ onComplete }) {
             style={{ width: '200px' }}
           >
             <div style={{
-              height: '2px', background: 'rgba(255,255,255,0.08)',
+              height: '2px', background: 'var(--bg-tertiary)',
               borderRadius: '2px', overflow: 'hidden'
             }}>
               <motion.div
@@ -101,7 +102,7 @@ export default function LoadingScreen({ onComplete }) {
             </div>
             <div style={{
               textAlign: 'center', marginTop: '10px',
-              fontSize: '11px', color: 'rgba(255,255,255,0.2)',
+              fontSize: '11px', color: 'var(--text-tertiary)',
               fontVariantNumeric: 'tabular-nums'
             }}>
               {progress}%
