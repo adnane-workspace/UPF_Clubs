@@ -1,0 +1,20 @@
+<svg width="150" height="75" viewBox="0 0 150 75" xmlns="http://www.w3.org/2000/svg">
+  <!-- Grouping for scaling -->
+  <g transform="translate(2, 2)">
+    <!-- Blue Boxes -->
+    <rect x="0" y="0" width="45" height="45" fill="#164595" />
+    <rect x="48" y="0" width="45" height="45" fill="#164595" />
+    <rect x="96" y="0" width="45" height="45" fill="#164595" />
+    
+    <!-- White Letters -->
+    <text x="22.5" y="34" font-family="'Times New Roman', Times, serif" font-weight="bold" font-size="38" text-anchor="middle" fill="white">U</text>
+    <text x="70.5" y="34" font-family="'Times New Roman', Times, serif" font-weight="bold" font-size="38" text-anchor="middle" fill="white">P</text>
+    <text x="118.5" y="34" font-family="'Times New Roman', Times, serif" font-weight="bold" font-size="38" text-anchor="middle" fill="white">F</text>
+    
+    <!-- Small Magenta Square -->
+    <rect x="128" y="38" width="16" height="16" fill="#AD006C" />
+    
+    <!-- University Text -->
+    <text x="0" y="70" font-family="Arial, Helvetica, sans-serif" font-size="24" fill="#7592C4">University</text>
+  </g>
+</svg>

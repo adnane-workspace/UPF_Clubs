@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
+import logo from '../../assets/logo.svg';
 
 const navLinks = [
   { label: 'Événements', href: '#evenements' },
@@ -153,14 +154,7 @@ export default function Navbar() {
           className="shrink-0"
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '2px', cursor: 'pointer' }}>
-            <span style={{
-              fontSize: 'clamp(16px, 2vw, 18px)', fontWeight: 800,
-              background: 'linear-gradient(135deg, #a78bfa, #38bdf8)',
-              WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'
-            }}>UPF</span>
-            <span style={{ fontSize: 'clamp(16px, 2vw, 18px)', fontWeight: 800, color: 'white' }}>
-              {' '}Clubs
-            </span>
+            <img src={logo} alt="Logo" className="h-10" />
           </div>
         </motion.a>
 
