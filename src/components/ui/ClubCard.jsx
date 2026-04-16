@@ -83,18 +83,31 @@ const ClubCard = memo(({ club, onClick }) => {
         height: '1px',
         background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent)'
       }} />
-      {/* Top Section: Icon & Badge */}
+      {/* Top Section: Logo & Badge */}
       <div className="flex items-center justify-between mb-3 sm:mb-4">
         <motion.div 
-          whileHover={{ rotate: [0, -10, 10, 0] }}
-          transition={{ duration: 0.4, repeat: 1 }}
-          className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl text-xl sm:text-2xl border flex items-center justify-center ${config.colors}`}
+          whileHover={{ rotate: [0, -5, 5, 0] }}
+          transition={{ duration: 0.4 }}
+          className={`w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl border flex items-center justify-center overflow-hidden bg-white/95 shadow-inner ${config.colors}`}
         >
-          <Icon size={22} />
+          <img 
+            src={club.image} 
+            alt={`${club.name} logo`} 
+            className="w-full h-full object-contain p-2"
+            onError={(e) => {
+              e.target.style.display = 'none';
+              e.target.nextSibling.style.display = 'block';
+            }}
+          />
+          <div style={{ display: 'none' }}>
+            <Icon size={24} />
+          </div>
         </motion.div>
-        <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border ${config.colors}`}>
-          {club.category}
-        </span>
+        <div className="flex flex-col items-end gap-1">
+          <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border ${config.colors}`}>
+            {club.category}
+          </span>
+        </div>
       </div>
 
       {/* Middle: Info */}

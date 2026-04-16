@@ -56,21 +56,29 @@ export default function ClubModal({ club, onClose }) {
             color: 'white', cursor: 'pointer', fontSize: '16px'
           }}>×</button>
 
-          {/* Club icon + name */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '20px' }}>
+          {/* Club logo + name */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginBottom: '24px' }}>
             <div style={{
-              width: '56px', height: '56px', borderRadius: '16px',
-              background: 'linear-gradient(135deg, #7c3aed, #2563eb)',
+              width: '72px', height: '72px', borderRadius: '20px',
+              background: 'white',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: '28px'
-            }}>{club.icon}</div>
+              overflow: 'hidden', padding: '12px',
+              boxShadow: '0 10px 30px -10px rgba(0,0,0,0.5)',
+              border: '1px solid rgba(255,255,255,0.1)'
+            }}>
+              <img 
+                src={club.image} 
+                alt={club.name} 
+                style={{ width: '100%', height: '100%', objectFit: 'contain' }} 
+              />
+            </div>
             <div>
-              <h2 style={{ fontSize: '20px', fontWeight: 700, color: 'white', margin: 0 }}>{club.name}</h2>
+              <h2 style={{ fontSize: '24px', fontWeight: 800, color: 'white', margin: 0, letterSpacing: '-0.02em' }}>{club.name}</h2>
               <span style={{
-                fontSize: '12px', padding: '3px 10px', borderRadius: '100px',
+                fontSize: '12px', padding: '4px 12px', borderRadius: '100px',
                 background: 'rgba(124,58,237,0.15)',
                 color: '#a78bfa', border: '0.5px solid rgba(124,58,237,0.3)',
-                display: 'inline-block', marginTop: '6px'
+                display: 'inline-block', marginTop: '8px', fontWeight: 700, textTransform: 'uppercase'
               }}>{club.category}</span>
             </div>
           </div>
