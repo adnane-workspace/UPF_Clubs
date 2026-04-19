@@ -64,15 +64,14 @@ export default function CustomCursor() {
     hover: {
       height: 70,
       width: 70,
-      backgroundColor: "rgba(124, 58, 237, 1)", // brand-purple
-      mixBlendMode: "difference",
-      border: "0px solid transparent",
+      backgroundColor: "rgba(124, 58, 237, 0.15)",
+      border: "1.5px solid rgba(124, 58, 237, 0.5)",
       borderRadius: "100%",
     },
     text: {
       height: 32,
       width: 2,
-      backgroundColor: "rgba(255, 255, 255, 1)",
+      backgroundColor: "rgba(255, 255, 255, 0.6)",
       border: "0px solid transparent",
       borderRadius: "0%",
     }
@@ -91,7 +90,15 @@ export default function CustomCursor() {
           translateX: "-50%",
           translateY: "-50%",
         }}
-        className="absolute w-2 h-2 bg-violet-500 rounded-full z-[10001] shadow-[0_0_10px_rgba(124,58,237,0.8)]"
+        className="absolute w-2 h-2 rounded-full z-[10001]"
+        style={{
+          backgroundColor: "rgba(124, 58, 237, 0.5)",
+          boxShadow: "0 0 10px rgba(124, 58, 237, 0.4)",
+          x: mouseX,
+          y: mouseY,
+          translateX: "-50%",
+          translateY: "-50%",
+        }}
       />
 
       {/* 

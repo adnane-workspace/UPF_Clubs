@@ -12,6 +12,8 @@ import LoadingScreen from './components/ui/LoadingScreen';
 import Marquee from './components/ui/Marquee';
 import TestimonialsSection from './components/home/TestimonialsSection';
 import CTASection from './components/home/CTASection';
+import CustomCursor from './components/ui/CustomCursor';
+import SectionReveal from './components/ui/SectionReveal';
 
 export default function App() {
   const [loading, setLoading] = useState(
@@ -35,6 +37,8 @@ export default function App() {
       transition: 'background-color 0.3s ease, color 0.3s ease'
     }}>
       
+      <CustomCursor />
+
       <AnimatePresence mode="wait">
         {loading && (
           <LoadingScreen key="loader" onComplete={handleLoadComplete} />
@@ -63,27 +67,39 @@ export default function App() {
               <Hero />
             </section>
 
-            <Marquee />
+            <SectionReveal direction="scale">
+              <Marquee />
+            </SectionReveal>
 
             <section id="clubs" style={sectionStyle}>
-              <ClubsSection />
+              <SectionReveal direction="up">
+                <ClubsSection />
+              </SectionReveal>
             </section>
 
             <section id="stats" style={sectionStyle}>
-               <StatsSection />
+               <SectionReveal direction="up">
+                 <StatsSection />
+               </SectionReveal>
             </section>
 
             <section id="pourquoi" style={sectionStyle}>
-              <WhyJoinSection />
+              <SectionReveal direction="up">
+                <WhyJoinSection />
+              </SectionReveal>
             </section>
 
             <section id="temoignages" style={sectionStyle}>
-              <TestimonialsSection />
+              <SectionReveal direction="up">
+                <TestimonialsSection />
+              </SectionReveal>
             </section>
           </main>
 
           <footer id="apropos">
-            <CTASection />
+            <SectionReveal direction="up">
+              <CTASection />
+            </SectionReveal>
             <Footer />
           </footer>
         </motion.div>
@@ -91,3 +107,4 @@ export default function App() {
     </div>
   );
 }
+

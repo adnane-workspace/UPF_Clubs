@@ -48,20 +48,7 @@ export default function LoadingScreen({ onComplete }) {
             <img src={logo} alt="UPF Logo" className="relative z-10 w-48 h-auto drop-shadow-[0_0_15px_rgba(22,69,149,0.3)]" />
           </motion.div>
 
-          {/* Titre */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
-            className="text-center"
-          >
-            <div className="text-3xl font-black bg-clip-text text-transparent bg-gradient-to-r from-violet-600 to-blue-500 dark:from-violet-400 dark:to-blue-400 tracking-tight">
-              UPF Clubs
-            </div>
-            <div className="text-[13px] text-gray-500 dark:text-white/30 mt-2 tracking-[0.2em] font-bold uppercase">
-              Université Privée de Fès
-            </div>
-          </motion.div>
+
 
           {/* Progress bar */}
           <motion.div
