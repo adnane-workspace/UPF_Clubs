@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '../../context/ThemeContext'
+import logo from '../../assets/logo.svg'
 
 export default function LoadingScreen({ onComplete }) {
   const { theme } = useTheme()
@@ -33,28 +35,17 @@ export default function LoadingScreen({ onComplete }) {
         <motion.div
           exit={{ opacity: 0, scale: 1.05 }}
           transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
-          style={{
-            position: 'fixed', inset: 0, zIndex: 9999,
-            background: 'var(--bg-primary)',
-            display: 'flex', flexDirection: 'column',
-            alignItems: 'center', justifyContent: 'center',
-            gap: '32px'
-          }}
+          className="fixed inset-0 z-[9999] flex flex-col items-center justify-center gap-12 bg-[var(--bg-primary)] transition-colors duration-500"
         >
           {/* Logo animé */}
           <motion.div
-            initial={{ scale: 0.5, opacity: 0 }}
+            initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }}
-            style={{
-              width: '72px', height: '72px', borderRadius: '20px',
-              background: 'linear-gradient(135deg, #7c3aed, #2563eb)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: '32px', fontWeight: 900, color: 'white',
-              boxShadow: '0 0 40px rgba(124,58,237,0.5)'
-            }}
+            transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
+            className="relative"
           >
-            U
+            <div className="absolute inset-0 bg-violet-500/20 blur-3xl rounded-full" />
+            <img src={logo} alt="UPF Logo" className="relative z-10 w-48 h-auto drop-shadow-[0_0_15px_rgba(22,69,149,0.3)]" />
           </motion.div>
 
           {/* Titre */}
@@ -62,21 +53,13 @@ export default function LoadingScreen({ onComplete }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.5 }}
-            style={{ textAlign: 'center' }}
+            className="text-center"
           >
-            <div style={{
-              fontSize: '28px', fontWeight: 800,
-              background: 'linear-gradient(135deg, #a78bfa, #38bdf8)',
-              WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text', letterSpacing: '-0.5px'
-            }}>
+            <div className="text-3xl font-black bg-clip-text text-transparent bg-gradient-to-r from-violet-600 to-blue-500 dark:from-violet-400 dark:to-blue-400 tracking-tight">
               UPF Clubs
             </div>
-            <div style={{
-              fontSize: '13px', color: 'var(--text-tertiary)',
-              marginTop: '6px', letterSpacing: '0.1em'
-            }}>
-              UNIVERSITÉ PRIVÉE DE FÈS
+            <div className="text-[13px] text-gray-500 dark:text-white/30 mt-2 tracking-[0.2em] font-bold uppercase">
+              Université Privée de Fès
             </div>
           </motion.div>
 
@@ -85,26 +68,18 @@ export default function LoadingScreen({ onComplete }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
-            style={{ width: '200px' }}
+            className="w-[200px]"
           >
-            <div style={{
-              height: '2px', background: 'var(--bg-tertiary)',
-              borderRadius: '2px', overflow: 'hidden'
-            }}>
+            <div className="h-0.5 bg-gray-200 dark:bg-white/10 rounded-full overflow-hidden">
               <motion.div
+                className="h-full rounded-full bg-gradient-to-r from-violet-600 to-blue-400"
                 style={{
-                  height: '100%', borderRadius: '2px',
-                  background: 'linear-gradient(90deg, #7c3aed, #38bdf8)',
                   width: `${progress}%`,
                   transition: 'width 0.05s linear'
                 }}
               />
             </div>
-            <div style={{
-              textAlign: 'center', marginTop: '10px',
-              fontSize: '11px', color: 'var(--text-tertiary)',
-              fontVariantNumeric: 'tabular-nums'
-            }}>
+            <div className="text-center mt-4 text-[11px] text-gray-400 dark:text-white/20 font-bold tracking-widest tabular-nums">
               {progress}%
             </div>
           </motion.div>
